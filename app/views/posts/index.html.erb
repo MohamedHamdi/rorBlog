@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+  <%= link_to "New post", new_post_path, class: "btn btn-default btn-lg" %>
+<% end %>
+
+<% if @posts.empty? %>
+  <h1 id="no-posts">No posts Created</h1>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="well well-lg">
+      <div class="post-title">
+        <%= link_to post.title, post_path(post) %>
+      </div>
+      <div class="post-body">
+        <%= post.body %>
+      </div>
+      <div class="author">
+        <small>Created by: <%= post.user.email %></small>
+      </div>
+    </div>
+  <% end %>
+<% end %>

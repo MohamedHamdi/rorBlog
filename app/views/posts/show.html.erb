@@ -1,0 +1,26 @@
+<post class="detail-post">
+  <h1 class="post-detail-title">
+    <%= @post.title %>
+  </h1>
+  <div class="glyphicon glyphicon-calendar" id="post-date">
+    <%= @post.created_at.strftime("%b %d, %Y") %>
+  </div>
+  <div class="post-body">
+    <%= @post.body %>
+  </div>
+
+  <% if user_signed_in? && current_user == @post.user %>
+    <div class="edit-delete">
+      <%= link_to "Edit post", edit_post_path(@post), class: "btn btn-primary btn-lg btn-space" %>
+      <%= link_to "Delete post", post_path(@post), method: :delete,
+      data: { confirm: "Are you sure you want to delete post?" },
+      class: "btn btn-primary btn-lg btn-space" %>
+    </div>
+  <% end %>
+
+  <% if user_signed_in?  %>
+    <div class="edit-delete">
+      <%= link_to "Comments", post_comments_path(@post), class: "btn btn-primary btn-lg btn-space" %>
+    </div>
+  <% end %>
+</post>
